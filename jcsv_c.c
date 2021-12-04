@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 2015 2016 ... 2020 2021
+ * Copyright (c) 2014 2015 2016 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -24,8 +24,6 @@
 #include <j_lib2m.h>
 
 #include "jcsv.h"
-
-char *jcsv_c_c="$Id: jcsv_c.c,v 2.5 2021/02/21 19:44:43 jmccue Exp $";
 
 /*
  * cols_init() -- split record into columns
@@ -412,5 +410,3 @@ void cols_show(FILE *fp, struct s_cols *c, long int rec_num)
     }
 
 } /* cols_show() */
-
-/* END: jcsv_c.c */

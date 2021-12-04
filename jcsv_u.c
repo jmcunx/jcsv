@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 2015 2016 ... 2020 2021
+ * Copyright (c) 2014 2015 2016 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -27,8 +27,6 @@
 #include <j_lib2m.h>
 
 #include "jcsv.h"
-
-char *jcsv_u_c="$Id: jcsv_u.c,v 2.3 2021/02/21 19:44:43 jmccue Exp $";
 
 /*
  * open_in() -- open in file
@@ -143,5 +141,3 @@ void init_finfo(struct s_file_info *f)
   f->fname = (char *) NULL;
 
 } /* init_finfo() */
-
-/* END: jcsv_h.c */

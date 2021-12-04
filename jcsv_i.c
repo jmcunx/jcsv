@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 2015 2016 ... 2020 2021
+ * Copyright (c) 2014 2015 2016 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -18,7 +18,9 @@
 /*
  * jcsv_i.c -- Initialization Routines
  */
+#ifndef _MSDOS
 #include <sys/param.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -31,8 +33,6 @@
 #include "jcsv.h"
 
 #define SCKARG 80
-
-char *jcsv_i_c="$Id: jcsv_i.c,v 2.6 2021/02/21 19:44:43 jmccue Exp $";
 
 /*** prototypes ***/
 void init_w(struct s_work *, char *);
@@ -362,5 +362,3 @@ int get_numb(FILE *fp, char *s, char arg_char, char *pname)
   return(atoi(optarg));
   
 } /* get_numb() */
-
-/* END: jcsv_i.c */

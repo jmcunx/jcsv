@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 2015 2016 ... 2019 2020
+ * Copyright (c) 2014 2015 2016 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -17,7 +17,7 @@
 
 #ifndef JCSV_H
 
-#define JCSV_H "$Id: jcsv.h,v 2.2 2020/06/14 17:40:58 jmccue Exp $"
+#define JCSV_H "INCLUDED"
 
 #define PROG_NAME  "jcsv"
 #define FIELD_DELIM     ','
@@ -101,5 +101,3 @@ void cols_free(struct s_cols *);
 void cols_show(FILE *, struct s_cols *, long int);
 
 #endif /*  JCSV_H  */
-
-/* END: jcsv.h */

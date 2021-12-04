@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 2015 2016 ... 2020 2021
+ * Copyright (c) 2014 2015 2016 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -27,14 +27,6 @@
 #include <j_lib2m.h>
 
 #include "jcsv.h"
-
-char *jcsv_h_c="$Id: jcsv_h.c,v 2.4 2021/02/21 19:44:43 jmccue Exp $";
-
-extern char *jcsv_c;
-extern char *jcsv_c_c;
-extern char *jcsv_h_c;
-extern char *jcsv_i_c;
-extern char *jcsv_u_c;
 
 /*** Messages ***/
 #define MSG_HELP_11  "Convert Text Files from/to csv"
@@ -79,19 +71,8 @@ void show_rev(FILE *fp, char *pname)
 {
 
   fprintf(fp,"%s %s:\n", pname, LIT_REV);
-  fprintf(fp,"\t%s\n", JCSV_H);
-  fprintf(fp,"\t%s\n", jcsv_c);
-  fprintf(fp,"\t%s\n", jcsv_c_c);
-  fprintf(fp,"\t%s\n", jcsv_h_c);
-  fprintf(fp,"\t%s\n", jcsv_i_c);
-  fprintf(fp,"\t%s\n", jcsv_u_c);
-
-#ifdef J_LIB2M_H
-  fprintf(fp, "\t%s\n", J_LIB2M_H);
-#endif
 #ifdef J_LIB2_H
-  fprintf(fp, "\t%s\n", J_LIB2_H);
-  fprintf(fp,"\t     %s %s\n", LIT_INFO_02, j2_get_build());
+  fprintf(fp,"\t%s %s\n", LIT_INFO_02, j2_get_build());
 #endif
 
 #ifdef OSTYPE
@@ -105,5 +86,3 @@ void show_rev(FILE *fp, char *pname)
   exit(EXIT_FAILURE);
 
 }  /* show_rev() */
-
-/* END: jcsv_h.c */

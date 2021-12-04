@@ -1,5 +1,5 @@
 .\" 
-.\" Copyright (c) 2014 2015 2016 2017 2018 
+.\" Copyright (c) 2014 2015 2016 2021 2022
 .\"     John McCue <jmccue@jmcunx.com>
 .\" 
 .\" Permission to use, copy, modify, and distribute this software for any
@@ -14,7 +14,7 @@
 .\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 .\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 .\" 
-.TH jcsv 1 "$Date: 2019/11/14 16:17:07 $" "JMC" "Local Command"
+.TH jcsv 1 "2019/11/14" "JMC" "Local Command"
 .SH NAME
 jcsv - Convert csv (Comma Separated Values) File(s)
 .SH SYNOPSIS

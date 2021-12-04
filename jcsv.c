@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 2015 2016 ... 2020 2021
+ * Copyright (c) 2014 2015 2016 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -19,7 +19,9 @@
  * jcsv.c -- main routines
  */
 
+#ifndef _MSDOS
 #include <sys/param.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -36,8 +38,6 @@
 #include <j_lib2m.h>
 
 #include "jcsv.h"
-
-char *jcsv_c="$Id: jcsv.c,v 2.10 2021/02/21 19:44:43 jmccue Exp $";
 
 /*** prototypes ***/
 void process_all(int, char **, struct s_work *);
@@ -567,5 +567,3 @@ void show_file_heading(struct s_work *w, char *fname)
   fprintf(w->err.fp, "%s\n", LIT_C80);
 
 } /* show_file_heading() */
-
-/* END: jcsv.c */
