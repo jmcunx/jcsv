@@ -1,6 +1,6 @@
 ## jcsv -- Convert Delimited Text to/from a csv (Comma Separated Value) File
 
-This will tale a delimited Text File and convert it to and from
+This will take a Delimited Text File and convert it to and from
 a csv File. 
 
 To build, execute build.sh to generate a Makefile from
