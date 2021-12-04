@@ -1,0 +1,175 @@
+#
+# Copyright (c) 2020 2021
+#     John McCue <jmccue@jmcunx.com>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#
+
+#
+# Makefile.template -- use build.sh to generate
+#                      a Makefile
+#
+# I tried, but I could not create
+# one Makefile to rule them all
+#
+SHELL=/bin/sh
+
+#--- REAL_DIR where the source is expected to be installed
+#    DESTDIR  where to install actual files if you want to
+#             create a tarball for install
+#    OWNER    Who will be the owner after install,
+#             on Linux also used for group
+#    WHEEL    For Systems that use 'wheel', group owner
+
+REAL_DIR=/opt/jmc
+DESTDIR=/opt/jmc
+
+PRODUCTION=$(DESTDIR)/bin
+PRODMAN=$(DESTDIR)/man/man1
+READINS=$(DESTDIR)/share/jcsv
+
+OWNER=root
+WHEEL=wheel
+
+#
+#>>> from here down should not need to change
+#    unless OS specific changes needed
+#
+
+#--- settings for BSD
+#BSD#OSDESC != uname -smr
+#BSD#mtype != uname -m
+#BSD#ISBSD=-DIS_BSD
+#BSD#GROUP=$(WHEEL)
+#BSD#LOCAL_LIBPATH=-R/usr/local/lib -R/opt/jmc/lib
+#BSD#LOCAL_LIB=-L/usr/local/lib -L/opt/jmc/lib
+#BSD#LOCAL_INC=-I/usr/local/include -I/opt/jmc/include
+#BSD#NROFF=mandoc
+#BSD#CTAGS=ctags -d
+#BSD#ETAGS=etags
+#BSD#CNROFF=
+#BSD#MKMAN=cat
+#BSD#WALL=-Wall
+#BSD#INSTALLD=install -d -g $(GROUP) -o $(OWNER) -m 755
+#BSD#INSTALLB=install -g $(GROUP) -o $(OWNER) -m 755 -s
+#BSD#INSTALLT=install -g $(GROUP) -o $(OWNER) -m 644
+
+#--- Settings for Linux, CNROFF will generate a compressed manual
+#GNU#OSDESC=ZZZ
+#GNU#mtype=ZZZ
+#GNU#ISBSD=
+#GNU#ifeq ($(mtype),x86_64)
+#GNU#MTYPE=64
+#GNU#endif
+#GNU#GROUP=$(OWNER)
+#GNU#LOCAL_LIBPATH=
+#GNU#LOCAL_LIB=-L/usr/local/lib$(MTYPE) -L/opt/jmc/lib$(MTYPE)
+#GNU#LOCAL_INC=-I/usr/local/include -I/opt/jmc/include
+#GNU#NROFF=nroff -man
+#GNU#CTAGS=ctags
+#GNU#ETAGS=etags
+#GNU#CNROFF=.gz
+#GNU#MKMAN=cat
+#GNU#WALL=-Wall
+#GNU#INSTALLD=install -d -g $(GROUP) -o $(OWNER) -m 755
+#GNU#INSTALLB=install -g $(GROUP) -o $(OWNER) -m 755 -s
+#GNU#INSTALLT=install -g $(GROUP) -o $(OWNER) -m 644
+
+#--- Settings for AIX with local lib
+#AIX#OSDESC=ZZZ
+#AIX#ISBSD=
+#AIX#LOCAL_LIBPATH=
+#AIX#LOCAL_LIB=-L$(HOME)/local/lib
+#AIX#LOCAL_INC=-I$(HOME)/local/include
+#AIX#NROFF=nroff -man
+#AIX#CTAGS=ctags
+#AIX#ETAGS=ctags
+#AIX#CNROFF=
+#AIX#MKMAN=nroff -man
+#AIX#WALL=
+#AIX#INSTALLD=echo
+#AIX#INSTALLB=install -G $(GROUP) -O $(OWNER) -M 755 -S
+#AIX#INSTALLT=install -G $(GROUP) -O $(OWNER) -M 644
+
+#--- Generic settions
+#DEBUG_BUILD1=-DDEBUG=Y
+#DEBUG_BUILD2=-g
+CAT=cat
+CC=cc
+CD=cd
+CHMOD=chmod
+CP=cp
+STRIP=strip
+ECHO=echo
+ETAGS=etags
+GZIP=gzip
+LD=cc
+LINK=cc
+MKDIR=mkdir
+MV=mv
+RM=rm -f
+
+OBJ=.o
+EXE=
+EXECNAME=jcsv$(EXE)
+
+LIBS=-lj_lib2
+
+ALL_OBJ=jcsv$(OBJ) jcsv_c$(OBJ) jcsv_h$(OBJ) jcsv_i$(OBJ) jcsv_u$(OBJ)
+ALL_C=jcsv.c jcsv_c.c jcsv_h.c jcsv_i.c jcsv_u.c
+ALL_H=jcsv.h
+
+CFLAGS=$(WALL) $(DEBUG_BUILD1) $(DEBUG_BUILD2) -c -O $(LOCAL_INC) $(ISBSD) -DOSTYPE="\"$(OSDESC)\""
+LFLAGS=$(WALL) $(DEBUG_BUILD2) $(LOCAL_LIBPATH) -O $(LOCAL_LIB) -o $(EXECNAME)
+
+#------------------------------------------------------------------------------
+# Build for OpenBSD
+#------------------------------------------------------------------------------
+all:	tags $(ALL_OBJ) $(ALL_H) jcsv.1$(CNROFF)
+	$(LINK) $(LFLAGS) $(ALL_OBJ) $(LIBS)
+
+tags:	 $(ALL_C) $(ALL_H) ../j_lib2/j_lib2.h ../j_lib2/j_lib2m.h
+	-$(CTAGS) $(ALL_C) $(ALL_H) > /dev/null 2>&1
+	-$(ETAGS)  $(ALL_C) $(ALL_H)
+
+jcsv.1.gz:	jcsv.1
+	-$(RM) jcsv.1.gz
+	$(GZIP) jcsv.1
+
+jcsv.1:	jcsv.man
+	$(MKMAN) jcsv.man > jcsv.1
+
+man:	jcsv.1$(CNROFF)
+	@echo man built
+
+install:	all
+	$(INSTALLD) $(PRODUCTION)
+	$(INSTALLD) $(PRODMAN)
+	$(INSTALLB) jcsv $(PRODUCTION)
+	$(INSTALLT) jcsv.1$(CNROFF) $(PRODMAN)
+	@echo DONE
+
+clean:
+	-$(RM) *$(OBJ)
+	-$(RM) jcsv$(EXE)
+	-$(RM) jcsv.1
+	-$(RM) jcsv.1.gz
+	-$(RM) TAGS
+	-$(RM) tags
+	-$(RM) core
+	-$(RM) *.core
+	-$(RM) a.out
+	-$(RM) *.pdb
+	-$(RM) *.ilk
+	-$(RM) Makefile
+# END
