@@ -137,7 +137,7 @@ long int process_a_file(struct s_work *w, char *fname,
     return(0L);
 
   /*** process data ***/
-  while (getline(buf, bsiz, fp) > (ssize_t) -1)
+  while (j2_getline(buf, bsiz, fp) > (ssize_t) -1)
     {
       lines_read++;
       j2_rtw((*buf));
