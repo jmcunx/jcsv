@@ -19,19 +19,18 @@
 SHELL=/bin/sh
 
 #--- where to install
+DESTDIR=LOCATION
 PRODUCTION=$(DESTDIR)/bin
 PRODPMAN=$(DESTDIR)/man
 PRODMAN=$(PRODPMAN)/man1
-INCJLIB2=-I$(DESTDIR)/include  # may need to be changed for j_lib2.h location
 
 #>>>>>>> select desired OS
 #--- Linux 64 bit
-WALL=-Wall -m64
-ETAGS=etags
-GZ=.gz
-NROFF=cat
-OSDESC != uname -smr
-LIBJLIB2=-L$(DESTDIR)/lib64
+#LINUX64#WALL=-Wall -m64
+#LINUX64#ETAGS=etags
+#LINUX64#GZ=.gz
+#LINUX64#NROFF=cat
+#LINUX64#OSDESC != uname -smr
 
 #--- Linux 32 bit
 #LINUX32#WALL=-Wall
@@ -39,15 +38,13 @@ LIBJLIB2=-L$(DESTDIR)/lib64
 #LINUX32#GZ=.gz
 #LINUX32#NROFF=cat
 #LINUX32#OSDESC != uname -smr
-#LINUX32#LIBJLIB2=-L$(DESTDIR)/lib
 
 #--- BSD 64 bit
-#BSD#WALL=-Wall -m64
-#BSD#ETAGS=etags
-#BSD#GZ=.gz
-#BSD#NROFF=cat
-#BSD#OSDESC != uname -smr
-#BSD#LIBJLIB2=-L$(DESTDIR)/lib
+#BSD64#WALL=-Wall -m64
+#BSD64#ETAGS=etags
+#BSD64#GZ=.gz
+#BSD64#NROFF=cat
+#BSD64#OSDESC != uname -smr
 
 #--- BSD 32 bit
 #BSD32#WALL=-Wall
@@ -55,7 +52,6 @@ LIBJLIB2=-L$(DESTDIR)/lib64
 #BSD32#GZ=.gz
 #BSD32#NROFF=cat
 #BSD32#OSDESC != uname -smr
-#BSD32#LIBJLIB2=-L$(DESTDIR)/lib
 
 #--- AIX specific
 #AIX#WALL=-bnoquiet
@@ -63,7 +59,6 @@ LIBJLIB2=-L$(DESTDIR)/lib64
 #AIX#GZ=
 #AIX#NROFF=nroff -man
 #AIX#OSDESC = `uname -a`
-#AIX#LIBJLIB2=-L$(DESTDIR)/lib
 
 #--- should not have to change these
 NROFF=nroff -man
@@ -82,8 +77,8 @@ MKDIR=mkdir
 
 EXE=
 OBJ=.o
-CFLAGS=-c $(WALL) $(INCJLIB2) -DOSTYPE="\"$(OSDESC)\""
-LFLAGS=$(WALL) $(LIBJLIB2) -o jcsv $(LIBS)
+CFLAGS=-c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
+LFLAGS=$(WALL) -LJLIBLOC -o jcsv $(LIBS)
 
 ALL_OBJ=jcsv$(OBJ) jcsv_c$(OBJ) jcsv_h$(OBJ) jcsv_i$(OBJ) jcsv_u$(OBJ)
 ALL_C=jcsv.c jcsv_c.c jcsv_h.c jcsv_i.c jcsv_u.c
@@ -142,6 +137,7 @@ clean:
 	-$(RM) *.pdb
 	-$(RM) *.ilk
 	-$(RM) *.bak
+	-$(RM) Makefile
 
 ### END
 
