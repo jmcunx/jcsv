@@ -61,7 +61,6 @@ PRODMAN=$(PRODPMAN)/man1
 #AIX#OSDESC = `uname -a`
 
 #--- should not have to change these
-NROFF=nroff -man
 CC=cc
 CHMOD=chmod
 CP=cp
