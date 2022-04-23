@@ -30,7 +30,13 @@
 #include <errno.h>
 #include <unistd.h>
 
-#ifdef IS_BSD
+#ifdef OpenBSD
+#include <err.h>
+#endif
+#ifdef __FreeBSD_version
+#include <err.h>
+#endif
+#ifdef __NetBSD_Version__
 #include <err.h>
 #endif
 
