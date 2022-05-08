@@ -78,6 +78,10 @@ int main(int argc, char **argv)
   
   close_out(&(w.out));
   close_out(&(w.err));
+  if (w.prog_name != (char *) NULL)
+    free(w.prog_name);
+  if (w.txt_cols != (int *) NULL)
+    free(w.txt_cols);
   exit(EXIT_SUCCESS);
 
 }  /* main() */

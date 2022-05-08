@@ -76,8 +76,14 @@ MKDIR=mkdir
 
 EXE=
 OBJ=.o
-CFLAGS=-c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
-LFLAGS=$(WALL) -LJLIBLOC -o jcsv $(LIBS)
+
+#--- for prod
+CFLAGS=-O1 -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
+LFLAGS=-O1 $(WALL) -LJLIBLOC -o jcsv $(LIBS)
+
+#--- for valgrind
+#CFLAGS=-O0 -g -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
+#LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jcsv $(LIBS)
 
 ALL_OBJ=jcsv$(OBJ) jcsv_c$(OBJ) jcsv_h$(OBJ) jcsv_i$(OBJ) jcsv_u$(OBJ)
 ALL_C=jcsv.c jcsv_c.c jcsv_h.c jcsv_i.c jcsv_u.c

@@ -76,12 +76,15 @@ void init(int argc, char **argv, struct s_work *w)
 	{
 	  fprintf(w->err.fp, MSG_INFO_I091, txt_raw);
 	  for (i = 0; w->txt_cols[i] > -1; i++)
-	    fprintf(stderr, MSG_INFO_I095, w->txt_cols[i] );
+	    fprintf(w->err.fp, MSG_INFO_I095, w->txt_cols[i] );
 	}
       fprintf(w->err.fp, MSG_INFO_I092, w->verbose);
       fprintf(w->err.fp, MSG_INFO_I093, (w->empty_space ? LIT_YES : LIT_NO));
       fprintf(w->err.fp, "\n");
     }
+
+  if (txt_raw != (char *) NULL)
+    free(txt_raw);
 
 }  /* init() */
 
