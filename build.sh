@@ -43,6 +43,12 @@ f_findl()
 	g_libloc="$HOME/Archive/local/$g_lib"
 	return
     fi
+    if test -f "/ccload/cdrtest/local/$g_lib/libj_lib2.so" -o -f "/ccload/cdrtest/local/$g_lib/libj_lib2.a"
+    then
+	g_include="$HOME/Archive/local/include"
+	g_libloc="$HOME/Archive/local/$g_lib"
+	return
+    fi
 
     echo "E10: cannot find j_lib2"
     exit 2
