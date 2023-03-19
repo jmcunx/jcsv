@@ -70,6 +70,7 @@ GZIP=gzip
 LINK=cc
 #FOUND_JLIB#LIBS=-lj_lib2
 #NO_JLIB#LIBS=
+#FOUND_JLIB#HJLIB=-DHAVE_JLIB
 MV=mv
 RM=rm -f
 STRIP=strip
@@ -79,7 +80,7 @@ EXE=
 OBJ=.o
 
 #--- for prod
-CFLAGS=-O1 -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
+CFLAGS=-O1 -c $(WALL) $(HJLIB) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
 #FOUND_JLIB#LFLAGS=-O1 $(WALL) -LJLIBLOC -o jcsv $(LIBS)
 #NO_JLIB#LFLAGS=-O1 $(WALL) -o jcsv $(LIBS)
 
@@ -87,8 +88,12 @@ CFLAGS=-O1 -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
 #CFLAGS=-O0 -g -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
 #LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jcsv $(LIBS)
 
-ALL_OBJ=jcsv$(OBJ) jcsv_c$(OBJ) jcsv_h$(OBJ) jcsv_j$(OBJ) jcsv_i$(OBJ) jcsv_u$(OBJ)
-ALL_C=jcsv.c jcsv_c.c jcsv_h.c jcsv_j.c jcsv_i.c jcsv_u.c
+#--- continue on
+#NO_JLIB#JCC=jcsv_j.c
+#NO_JLIB#JCOB=jcsv_j$(OBJ)
+
+ALL_OBJ=jcsv$(OBJ) jcsv_c$(OBJ) jcsv_h$(OBJ) $(JCOB) jcsv_i$(OBJ) jcsv_u$(OBJ)
+ALL_C=jcsv.c jcsv_c.c jcsv_h.c $(JCC) jcsv_i.c jcsv_u.c
 ALL_H=jcsv.h
 
 #

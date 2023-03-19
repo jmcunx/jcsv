@@ -40,6 +40,11 @@
 #include <err.h>
 #endif
 
+#ifdef HAVE_JLIB
+#include <j_lib2.h>
+#include <j_lib2m.h>
+#endif
+
 #include "jcsv.h"
 
 /*** prototypes ***/
@@ -550,7 +555,7 @@ int close_csv_quote(char *b, size_t i)
 
   return((int) FALSE);
 
-} /* _csv_quote() */
+} /* close_csv_quote() */
 
 /*
  * show_file_heading() -- Show run stats

@@ -331,4 +331,3 @@ long int j2_rtw(char *buffer)
   return((long int) strlen(b));
 
 } /* j2_rtw() */
-
