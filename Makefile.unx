@@ -85,8 +85,9 @@ CFLAGS=-O1 -c $(WALL) $(HJLIB) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
 #NO_JLIB#LFLAGS=-O1 $(WALL) -o jcsv $(LIBS)
 
 #--- for valgrind
-#CFLAGS=-O0 -g -c $(WALL) $(HJLIB) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
-#LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jcsv $(LIBS)
+#VALGRIND#CFLAGS=-O0 -g -c $(WALL) $(HJLIB) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
+#VALGRIND##FOUND_JLIB#LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jcsv $(LIBS)
+#VALGRIND##NO_JLIB#LFLAGS=-O0 -g -$(WALL) -o jcsv $(LIBS)
 
 #--- continue on
 #NO_JLIB#JCC=jcsv_j.c

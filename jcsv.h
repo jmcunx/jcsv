@@ -208,6 +208,7 @@ char *j2_get_prgname(char *argv_0, char *default_name);
 int j2_is_numr(char *s);
 long int j2_justleft(char *s);
 long int j2_rtw(char *buffer);
+SSIZE_T j2_getline(char **buf, size_t *n, FILE *fp);
 #endif
 
 #endif /*  JCSV_H  */
