@@ -1,6 +1,6 @@
 # for jcsv
 #
-# Copyright (c) 2022 2023
+# Copyright (c) 2022 2023 2024
 #     John McCue <jmccue@jmcunx.com>
 #
 # Permission to use, copy, modify, and distribute this software for any
@@ -68,7 +68,8 @@ CTAGS=ctags
 ECHO=echo
 GZIP=gzip
 LINK=cc
-LIBS=-lj_lib2
+#FOUND_JLIB#LIBS=-lj_lib2
+#NO_JLIB#LIBS=
 MV=mv
 RM=rm -f
 STRIP=strip
@@ -79,14 +80,15 @@ OBJ=.o
 
 #--- for prod
 CFLAGS=-O1 -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
-LFLAGS=-O1 $(WALL) -LJLIBLOC -o jcsv $(LIBS)
+#FOUND_JLIB#LFLAGS=-O1 $(WALL) -LJLIBLOC -o jcsv $(LIBS)
+#NO_JLIB#LFLAGS=-O1 $(WALL) -o jcsv $(LIBS)
 
 #--- for valgrind
 #CFLAGS=-O0 -g -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
 #LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jcsv $(LIBS)
 
-ALL_OBJ=jcsv$(OBJ) jcsv_c$(OBJ) jcsv_h$(OBJ) jcsv_i$(OBJ) jcsv_u$(OBJ)
-ALL_C=jcsv.c jcsv_c.c jcsv_h.c jcsv_i.c jcsv_u.c
+ALL_OBJ=jcsv$(OBJ) jcsv_c$(OBJ) jcsv_h$(OBJ) jcsv_j$(OBJ) jcsv_i$(OBJ) jcsv_u$(OBJ)
+ALL_C=jcsv.c jcsv_c.c jcsv_h.c jcsv_j.c jcsv_i.c jcsv_u.c
 ALL_H=jcsv.h
 
 #

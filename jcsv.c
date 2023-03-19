@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 2015 2016 ... 2021 2022
+ * Copyright (c) 2014 2015 2016 ... 2023 2024
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -39,9 +39,6 @@
 #ifdef __NetBSD_Version__
 #include <err.h>
 #endif
-
-#include <j_lib2.h>
-#include <j_lib2m.h>
 
 #include "jcsv.h"
 
@@ -147,7 +144,7 @@ long int process_a_file(struct s_work *w, char *fname,
     return(0L);
 
   /*** process data ***/
-  while (j2_getline(buf, bsiz, fp) > (ssize_t) -1)
+  while (getline(buf, bsiz, fp) > (ssize_t) -1)
     {
       lines_read++;
       j2_rtw((*buf));
