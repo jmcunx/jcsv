@@ -59,15 +59,15 @@ int j2_bye_char(char *buffer, char c)
 #ifdef OpenBSD
   size_t len;
 #endif
-  
+
   if (c == JLIB2_CHAR_NULL)
     return(0);
-  
+
   i = strlen(buffer) + 2;
   temp_str = calloc(i, sizeof(char));
   if (temp_str == (char *) NULL)
     return(-1);
-  
+
   for ( i=0, j=0; buffer[i] != JLIB2_CHAR_NULL; i++)
     {
       if (buffer[i] == c)
@@ -104,7 +104,7 @@ int j2_bye_char(char *buffer, char c)
 
 
 /*
- * j2_chg_char() -- replaces all occurrences of one character 
+ * j2_chg_char() -- replaces all occurrences of one character
  *                  with another char
  */
 long int j2_chg_char(char old, char new, char *s, SSIZE_T force_size)
@@ -204,6 +204,22 @@ long int j2_fix_delm(char delm, char **fixed, char *buf)
 } /* j2_fix_delm() */
 
 /*
+ * j2_clr_str() -- Clears a string with a char & ensure it ends with NULL
+ */
+long int j2_clr_str(char *s, char c, int size)
+
+{
+  if (s == (char *) NULL)
+    return(0L);
+
+  memset(s, (int) c, (size_t) size);
+  s[size - 1 ] = JLIB2_CHAR_NULL;
+
+  return((long int) strlen(s));
+
+} /* j2_clr_str() */
+
+/*
  * j2_getline() -- A front end to getline(3) or a hack for
  *                 systems without getline(3)
  */
@@ -212,7 +228,7 @@ SSIZE_T j2_getline(char **buf, size_t *n, FILE *fp)
 #ifdef HAS_GETLINE
   return(getline(buf, n, fp));
 #else
-  
+
   if ((*buf) == (char *) NULL)
     {
       (*n) = SIZE_GETLINE_BUF + 1;
@@ -221,13 +237,13 @@ SSIZE_T j2_getline(char **buf, size_t *n, FILE *fp)
 	return(-1);
       j2_clr_str((*buf), (*n), JLIB2_CHAR_NULL);
     }
-    
+
   if (fgets((*buf), (*n), fp) == (char *) NULL)
     return(-1);
   return((SSIZE_T) strlen((*buf)));
-  
+
 #endif
-  
+
 } /* j2_getline() */
 
 /*
@@ -249,9 +265,9 @@ char *j2_get_prgname(char *argv_0, char *default_name)
       else
 	return(strdup(default_name));
     }
-  
+
   /* basename(3) not in Coherent or MS-DOS */
- 
+
   for (i = 0, j = 0; argv_0[i] != JLIB2_CHAR_NULL; i++)
     {
       if (argv_0[i] == '/')
@@ -261,7 +277,7 @@ char *j2_get_prgname(char *argv_0, char *default_name)
 	  if (argv_0[i] == '\\')
 	    j = i + 1;
 	}
-    } 
+    }
 
   if (argv_0[j] == JLIB2_CHAR_NULL)
     if (default_name == (char *) NULL)
@@ -281,13 +297,13 @@ int j2_is_numr(char *s)
 {
   if (s == (char *) NULL)
     return((int) FALSE); /* NULL pointer */
-  
+
   for ( ; (*s) != JLIB2_CHAR_NULL; s++)
     {
       if ( ! isdigit((int)(*s)) )
 	return(FALSE);
     }
-  
+
   return(TRUE);
 
 } /* j2_is_numr() */
@@ -304,7 +320,7 @@ long int j2_justleft(char *s)
 #ifdef OpenBSD
   size_t len;
 #endif
-  
+
   if (s == (char *) NULL)
     return(0L); /* NULL pointer, pretend 0 */
 
@@ -318,7 +334,7 @@ long int j2_justleft(char *s)
       else
 	return((long int) strlen(s));
     }
-  
+
 #ifdef OpenBSD
   len = strlen(s) + 1;
   temp_s = strndup(s, len);
@@ -328,13 +344,13 @@ long int j2_justleft(char *s)
 
   if ( temp_s == (char *) NULL )
     return(-1L); /* not enough memory */
-  
+
   for (i=0; temp_s[i] != JLIB2_CHAR_NULL; i++)
     {
       if (! isspace((int) temp_s[i]) )
 	break;
     }
- 
+
 #ifdef OpenBSD
   strlcpy(s,&(temp_s[i]),len);
 #else
@@ -342,7 +358,7 @@ long int j2_justleft(char *s)
 #endif
 
   free(temp_s);
-  
+
   return((long int) strlen(s));
 
 } /* j2_justleft() */
