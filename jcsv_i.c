@@ -192,7 +192,7 @@ char *process_arg(int argc, char **argv, struct s_work *w)
 	  save_fname(&(w->err), optarg, w->prog_name, ARG_ERR);
 	  break;
 	case ARG_OUT:
-	  save_fname(&(w->out), optarg, w->prog_name, ARG_ERR);
+	  save_fname(&(w->out), optarg, w->prog_name, ARG_OUT);
 	  break;
 	case ARG_MAX_SIZE:
 	  w->max_col_size = get_numb(stderr, optarg, ARG_MAX_SIZE, w->prog_name);

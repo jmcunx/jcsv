@@ -122,14 +122,21 @@ void close_in(FILE **in, char *fname)
 void close_out(struct s_file_info *f)
 
 {
+  int is_stdout = FALSE;
+
   if (f->fname == (char *) NULL)
     return;
-  if (strcmp(f->fname, FILE_NAME_STDOUT) == 0)
-    return;
 
-  fclose(f->fp);
-  free(f->fname);
-  f->fname = (char *) NULL;
+  if (strcmp(f->fname, FILE_NAME_STDOUT) == 0)
+    is_stdout = TRUE;
+
+  if (is_stdout == FALSE)
+    fclose(f->fp);
+  if (f->fname != (char *) NULL)
+    {
+      free(f->fname);
+      f->fname = (char *) NULL;
+    }
 
 } /* close_out() */
 
